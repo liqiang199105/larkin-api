@@ -1,0 +1,30 @@
+<assembly>
+	<id>bin</id>
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+	<dependencySets>
+		<dependencySet>
+			<useProjectArtifact>true</useProjectArtifact>
+			<outputDirectory>lib</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+	<fileSets>
+		<fileSet>
+			<directory>src/main/bin</directory>
+			<outputDirectory>bin</outputDirectory>
+			<includes>
+				<include>start.sh</include>
+			</includes>
+		</fileSet>
+
+		<fileSet>
+			<directory>src/main/resources/config</directory>
+			<outputDirectory>conf</outputDirectory>
+			<includes>
+				<include>painter.${profiles.active}.properties</include>
+				<include>log4j.properties</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>
