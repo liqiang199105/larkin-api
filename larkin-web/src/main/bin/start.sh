@@ -7,5 +7,5 @@ then
     kill $pid
 fi
 sleep 2
-JVM_ARGS="-Xms512m -Xmx512m -Xloggc:/home/gc/gc.log"
+JVM_ARGS="-Xms512m -Xmx512m -Xloggc:/home/logs/gc/gc.log"
 java $JVM_ARGS -cp ../conf:../lib/larkin-web-1.0-SNAPSHOT.jar com.larkin.web.AppMain $@ 2>&1
