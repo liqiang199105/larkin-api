@@ -1,22 +1,27 @@
 package com.larkin.web.http.intercepter;
 
-import com.beust.jcommander.internal.Maps;
-import com.google.common.base.*;
-import com.larkin.web.http.exception.ApiError;
-import com.larkin.web.http.exception.ApiException;
-import com.larkin.web.utils.RedisKeyUtil;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.beust.jcommander.internal.Maps;
+import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.larkin.web.http.exception.ApiError;
+import com.larkin.web.http.exception.ApiException;
+import com.larkin.web.utils.RedisKeyUtil;
+
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
 @Component
 public class ApiInterceptor extends HandlerInterceptorAdapter {
@@ -37,7 +42,7 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-
+        response.setCharacterEncoding("UTF-8"); //设置编码格式
         //  Annotation
         if (handler.getClass().isAssignableFrom(HandlerMethod.class)){
             logger.info(request.getRequestURL() + "?" + request.getParameterMap());
